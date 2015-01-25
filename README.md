@@ -7,3 +7,4 @@ My Project Euler solutions
 - 10:
   - Prime generation too slow for 2,000,000
   - Add profiling 
+  - https://blog.golang.org/profiling-go-programs
