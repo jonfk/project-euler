@@ -1,3 +1,8 @@
+// NOTES
+// compile: go build primes.go
+// run with profiling: ./primes -cpuprofile.prof
+// profile with : go tool pprof primes primes.prof
+
 package main
 
 import (
