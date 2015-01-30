@@ -1,17 +1,35 @@
 package main
 
 import (
+	"flag"
 	"fmt"
+	"log"
+	"os"
+	"runtime/pprof"
 )
 
+var cpuprofile = flag.String("cpuprofile", "", "write cpu profile to file")
+
 func main() {
+	// Profiling
+	flag.Parse()
+	if *cpuprofile != "" {
+		f, err := os.Create(*cpuprofile)
+		if err != nil {
+			log.Fatal(err)
+		}
+		pprof.StartCPUProfile(f)
+		defer pprof.StopCPUProfile()
+	}
+
 	// fmt.Printf("primes : %v\n", primes(1000000))
 	var result int64 = 0
-	primes := primes(100000)
+	primes := primes(2000000)
 	for _, j := range primes {
 		result += j
 	}
-	fmt.Printf("Primes: %v \nResult: %d\n", primes, result)
+	// fmt.Printf("Primes: %v \n", primes)
+	fmt.Printf("Result: %d\n", result)
 }
 
 // primes gives the list of primest up to n-1 inclusive
@@ -45,11 +63,11 @@ Outer:
 	}
 
 	primes[1] = 0
-	for i := 0; i < len(primes); i++ {
-		if primes[i] == 0 {
-			primes = append(primes[:i], primes[i+1:]...)
-			i -= 1
-		}
-	}
+	// for i := 0; i < len(primes); i++ {
+	// 	if primes[i] == 0 {
+	// 		primes = append(primes[:i], primes[i+1:]...)
+	// 		i -= 1
+	// 	}
+	// }
 	return primes
 }
