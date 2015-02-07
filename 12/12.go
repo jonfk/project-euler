@@ -12,9 +12,8 @@ func main() {
 	for i := 1; ; i++ {
 		lastTri = newTri(i, lastTri)
 		numDivisors := countDivisors(lastTri)
-		if numDivisors >= 500 {
+		if numDivisors > 500 {
 			fmt.Printf("RESULT: %d, Divisors: %d\n\n", lastTri, numDivisors)
-			acceptor <- lastTri
 			break
 		}
 	}
@@ -53,6 +52,9 @@ func countDivisors(n int) int {
 			divisors += 1
 		}
 	}
-	// fmt.Printf("divisors : %d for %d\n", divisors, n)
+	fmt.Printf("divisors : %d for %d\n", divisors, n)
+	if divisors > 100 {
+		fmt.Printf("\033[92m divisors : %d for %d\033[92m\n", divisors, n)
+	}
 	return divisors + 1
 }
