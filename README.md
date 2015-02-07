@@ -8,13 +8,15 @@ Proceed at your own risk. I don't claim my solutions are the most elegant
 or efficient, only that they are my own.
 
 ###Currently implemented:
+- 1:
+  - Racket
 - 8:
   - go
 - 10:
-  - https://blog.golang.org/profiling-go-programs
   - go
-  - Discovered that most time was spent in memmove
-  - removed slice operation from program and it found primes under 2,000,000 in:
+    - https://blog.golang.org/profiling-go-programs
+    - Discovered that most time was spent in memmove
+    - removed slice operation from program and it found primes under 2,000,000 in:
 ```bash
 $ time ./primes
 Result: 142913828922
@@ -24,3 +26,8 @@ user    4m37.685s
 sys     0m1.539s
 ```
 - 11
+
+###Languages To try
+- Nim
+- Javascript
+- Lua
