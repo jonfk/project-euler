@@ -18,3 +18,5 @@ textToInt::[Char]->[Int]
 textToInt list = map (\x -> read [x] ::Int) list
 
 result = process 0 $ textToInt text
+
+main = print result
