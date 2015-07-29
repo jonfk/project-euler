@@ -31,7 +31,7 @@ type Node struct {
 
 func main() {
 	// fmt.Printf("%#v\n", graph)
-	graph := load()
+	// graph := load()
 	// spew.Dump(graph)
 }
 
