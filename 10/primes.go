@@ -29,7 +29,7 @@ func main() {
 
 	// fmt.Printf("primes : %v\n", primes(1000000))
 	var result int64 = 0
-	primes := primes(2000000)
+	primes := primes2(2000000)
 	for _, j := range primes {
 		result += j
 	}
@@ -75,4 +75,27 @@ Outer:
 	// 	}
 	// }
 	return primes
+}
+
+func primes2(limit int64) []int64 {
+	var isPrimes []bool = make([]bool, limit+1)
+	for i := range isPrimes {
+		isPrimes[i] = true
+	}
+	isPrimes[0], isPrimes[1] = false, false
+
+	for i := range isPrimes {
+		if isPrimes[i] {
+			for j := i + i; int64(j) <= limit; j += i {
+				isPrimes[j] = false
+			}
+		}
+	}
+	var result []int64
+	for i := range isPrimes {
+		if isPrimes[i] {
+			result = append(result, int64(i))
+		}
+	}
+	return result
 }
