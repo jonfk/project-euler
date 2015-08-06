@@ -39,16 +39,7 @@ or efficient, only that they are my own.
 - 10:
   - go
     - https://blog.golang.org/profiling-go-programs
-    - Discovered that most time was spent in memmove
-    - removed slice operation from program and it found primes under 2,000,000 in:
-```bash
-$ time ./primes
-Result: 142913828922
-
-real    4m38.983s
-user    4m37.685s
-sys     0m1.539s
-```
+    - profiling no longer needed. time spent in memory allocation. Turn to static allocation with appending.
   - Haskell (incomplete)
 - 11
 
@@ -57,3 +48,13 @@ sys     0m1.539s
 - Javascript
 - Lua
 - Rust
+
+###Notes
+
+####Rust
+Don't forget to compile with optimization. By default rustc compiles with no optimizations.
+```bash
+$ rustc -O 1.rs
+# OR also
+$ rustc -C opt-level=3
+```
