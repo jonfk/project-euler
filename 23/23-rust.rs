@@ -30,15 +30,10 @@ fn proper_divisors(n: u64) -> Vec<u64> {
 }
 
 fn is_abundant(n: u64, cache: &mut HashMap<u64,bool>) -> bool {
-    let abundant = match cache.get(&n) {
-        Some(b) => *b,
-        None => {
-            let divisors = proper_divisors(n);
-            let sum = divisors.iter().fold(0, |acc, x| x + acc);
-            let abundant = sum > n;
-            abundant
-        },
-    };
-    cache.insert(n, abundant);
-    abundant
+    *cache.entry(n).or_insert_with(|| {
+        let divisors = proper_divisors(n);
+        let sum = divisors.iter().fold(0, |acc, x| x + acc);
+        let abundant = sum > n;
+        abundant
+    })
 }
