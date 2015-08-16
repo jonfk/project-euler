@@ -1,9 +1,26 @@
 
+use std::env;
+use std::process;
+
 fn main() {
-    let num = 2000000;
-    let primes = sieve(num);
-    let sum = primes.iter().fold(0, |acc, x| acc + x);
-    println!("{:?}", sum);
+    let args = env::args();
+    let count = args.len();
+    if  count < 2 {
+        println!("Please enter a limit");
+        process::exit(1);
+    }
+    let limit = args.take(2).last().unwrap().parse::<u64>();
+    match limit {
+        Ok(limit) => {
+            println!("{}", limit);
+            let primes = sieve(limit);
+            println!("{:?}", primes);
+        },
+        Err(_) => {
+            println!("Please enter a valid number");
+        },
+    }
+
 }
 
 fn sieve(bound: u64) -> Vec<u64> {
@@ -20,10 +37,4 @@ fn sieve(bound: u64) -> Vec<u64> {
         }
     }
     is_prime.iter().enumerate().filter_map(|(prime, &is_prime)| if is_prime { Some(prime as u64) } else { None }).collect::<Vec<_>>()
-}
-
-fn prime_factors(n: u64) -> Vec<u64> {
-    let primes = sieve((n as f64).sqrt() as u64 + 1 );
-
-    primes.iter().filter(|&prime| n % prime == 0).map(|&x| x).collect::<Vec<_>>()
 }
