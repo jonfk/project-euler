@@ -1,9 +1,9 @@
 
 fn main() {
     let primes = sieve(987654321);
-    let a = permutations(String::from("123456789")).iter().map(|x| x.parse::<u64>().unwrap() ).collect::<Vec<_>>();
-    let l = a.iter().filter(|x| primes.contains(x)).max();
-    println!("{:?}",l);
+    //let a = permutations(String::from("123456789")).iter().map(|x| x.parse::<u64>().unwrap() ).collect::<Vec<_>>();
+    let max_pandigital = primes.iter().filter(|&x| is_pandigital(*x)).max();
+    println!("{:?}", max_pandigital);
 
 }
 
@@ -45,4 +45,15 @@ fn sieve(bound: u64) -> Vec<u64> {
         }
     }
     is_prime.iter().enumerate().filter_map(|(prime, &is_prime)| if is_prime { Some(prime as u64) } else { None }).collect::<Vec<_>>()
+}
+
+fn is_pandigital(n: u64) -> bool {
+    let str = n.to_string();
+    let len = str.len();
+    for i in 1..len+1 {
+        if !str.contains(&i.to_string()) {
+            return false;
+        }
+    }
+    return true;
 }
