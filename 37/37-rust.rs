@@ -7,15 +7,21 @@ fn main() {
 fn find_truncable_primes() -> Vec<u64> {
     let mut truncable = Vec::new();
     let mut i = 11;
-    let primes = sieve(10000000);
+    let mut limit: u64 = 100000;
+    let mut primes = sieve(limit);
     while truncable.len() < 11 {
         let mut truncated = truncate_right(i);
         truncated.extend(truncate_left(i));
         if truncated.iter().all(|x| primes.contains(x)) {
             truncable.push(i);
-            //println!("{:?}", truncable);
+            println!("{:?}", truncable);
         }
-        println!("{}", i);
+        if i > limit {
+            limit = limit * 10;
+            primes = sieve(limit);
+            println!("increasing limit to {}", limit)
+        }
+        //println!("{}", i);
         i += 1;
     }
     truncable
